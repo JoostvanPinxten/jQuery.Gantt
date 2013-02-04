@@ -14,7 +14,7 @@
 				padding: 0 0 50px 0;
 			}
 			.contain {
-				width: 800px;
+				width: 95%;
 				margin: 0 auto;
 			}
 			h1 {
@@ -37,25 +37,12 @@
 		<div class="contain">
 
 			<h1>
-				jQuery.Gantt
-				<small>&mdash; Draw Gantt charts with the famous jQuery ease of development</small>
+				Resource occupation
+				<small>&mdash; Gantt chart shows the activities on a resource</small>
 			</h1>
 
-			<h2>Contributors</h2>
-			<ul>
-				<li>
-					<strong><a href="http://mbielanczuk.com/" target="_blank">Marek Bielańczuk</a></strong> wrote the original jQuery.Gantt plugin that this version is based off of.
-				</li>
-				<li>
-					<strong><a href="http://taitbrown.com/" target="_blank">Tait Brown</a></strong> enforced stricter code guidelines by validating the code, updating it to support HTML5 and tweaking the design.
-				</li>
-				<li>
-					<strong><a href="mailto:leo.pfeifenberger@googlemail.com" target="_blank">Leo Pfeifenberger</a></strong> made <em>major</em> performance updates as well as adding requested features such as click events, state persisting via cookies and scrollToToday on load functionality.
-				</li>
-			</ul>
-
 	    	<h2>
-	    		Example
+	    		Gantt chart
 	    	</h2>
 				
 			<div class="gantt"></div>
@@ -184,22 +171,22 @@
 				minScale: 1,
 				itemsPerPage: 10,
 				onItemClick: function(data) {
-					alert("Item clicked - show some details");
+					//alert("Item clicked - show some details");
 				},
 				onAddClick: function(dt, rowId) {
-					alert("Empty space clicked - add an item!");
+					//alert("Empty space clicked - add an item!");
 				},
 				onRender: function() {
-					if (window.console && typeof console.log === "function") {
+					/*if (window.console && typeof console.log === "function") {
 						console.log("chart rendered");
-					}
+					}*/
 				}
 			});
 
 			$(".gantt").popover({
 				selector: ".bar",
-				title: "I'm a popover",
-				content: "And I'm the content of said popover.",
+				//title: "I'm a popover",
+				//content: "And I'm the content of said popover.",
 				trigger: "hover"
 			});
 
