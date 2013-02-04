@@ -727,13 +727,13 @@
 					console.log(scale, val);
 					if( val < 0) {
 						// zoom in
-						if(settings.scale*10 <= 10000){
-							scale = settings.scale*10;
+						if(settings.scale/10 >= 1) {
+							scale = settings.scale/10;
 						}
 					} else {
 						// zoom out
-						if(settings.scale/10 >= 1) {
-							scale = settings.scale/10;
+						if(settings.scale*10 <= 10000){
+							scale = settings.scale*10;
 						}
 					}
 
