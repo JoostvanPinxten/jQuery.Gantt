@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿<!doctype html>
 <html lang="en-au">
     <head>
@@ -549,6 +550,218 @@ values: [{
 		});
 
     </script>
+=======
+﻿<!doctype html>
+<html lang="en-au">
+    <head>
+        <title>jQuery.Gantt</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" >
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" />
+        <link rel="stylesheet" href="http://taitems.github.com/UX-Lab/core/css/prettify.css" />
+		<style type="text/css">
+			body {
+				font-family: Helvetica, Arial, sans-serif;
+				font-size: 13px;
+				padding: 0 0 50px 0;
+			}
+			.contain {
+				width: 800px;
+				margin: 0 auto;
+			}
+			h1 {
+				margin: 40px 0 20px 0;
+			}
+			h2 {
+				font-size: 1.5em;
+				padding-bottom: 3px;
+				border-bottom: 1px solid #DDD;
+				margin-top: 50px;
+				margin-bottom: 25px;
+			}
+			table th:first-child {
+				width: 150px;
+			}
+		</style>
+    </head>
+    <body>
+
+		<div class="contain">
+
+			<h1>
+				jQuery.Gantt
+				<small>&mdash; Draw Gantt charts with the famous jQuery ease of development</small>
+			</h1>
+
+			<h2>Contributors</h2>
+			<ul>
+				<li>
+					<strong><a href="http://mbielanczuk.com/" target="_blank">Marek Bielańczuk</a></strong> wrote the original jQuery.Gantt plugin that this version is based off of.
+				</li>
+				<li>
+					<strong><a href="http://taitbrown.com/" target="_blank">Tait Brown</a></strong> enforced stricter code guidelines by validating the code, updating it to support HTML5 and tweaking the design.
+				</li>
+				<li>
+					<strong><a href="mailto:leo.pfeifenberger@googlemail.com" target="_blank">Leo Pfeifenberger</a></strong> made <em>major</em> performance updates as well as adding requested features such as click events, state persisting via cookies and scrollToToday on load functionality.
+				</li>
+			</ul>
+
+	    	<h2>
+	    		Example
+	    	</h2>
+				
+			<div class="gantt"></div>
+		</div>
+
+    </body>
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="js/jquery.fn.gantt.js"></script>
+	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+	<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+    <script>
+
+		$(function() {
+
+			"use strict";
+
+			$(".gantt").gantt({
+				source: [{
+					name: "Node 1",
+					desc: "Computation",
+					values: [{
+						from: 0.2,
+						to: 300,
+						label: "Task1", 
+						customClass: "ganttRed"
+					},{
+						from: 300,
+						to: 600,
+						label: "Task2", 
+						customClass: "ganttRed"
+					},{
+						from: 800,
+						to: 1100,
+						label: "Task1", 
+						customClass: "ganttBlue"
+					},{
+						from: 1160,
+						to: 1460,
+						label: "Task2", 
+						customClass: "ganttBlue"
+					}]
+				},{
+					name: " ",
+					desc: "Transfer out",
+					values: [{
+						from: 3.00,
+						to: 3.00,
+						label: "Scoping", 
+						customClass: "ganttRed"
+					}]
+				},{
+					name: "Node 2",
+					desc: "Computation",
+					values: [{
+						from: 0,
+						to: 3,
+						label: "Task3", 
+						customClass: "ganttRed"
+					}, {
+						from: 4,
+						to: 6,
+						label: "Task4", 
+						customClass: "ganttRed"
+					}]
+				},{
+					name: " ",
+					desc: "Transfer out",
+					values: [{
+						from: 1,
+						to: 3,
+						label: "Task4", 
+						customClass: "ganttRed"
+					}]
+				},{
+					name: "Sprint 2",
+					desc: "Development",
+					values: [{
+						from: 2,
+						to: 5,
+						label: "Development", 
+						customClass: "ganttGreen"
+					}]
+				},{
+					name: " ",
+					desc: "Showcasing",
+					values: [{
+						from: 3,
+						to: 6,
+						label: "Showcasing", 
+						customClass: "ganttBlue"
+					}]
+				},{
+					name: "Release Stage",
+					desc: "Training",
+					values: [{
+						from: 4,
+						to: 5,
+						label: "Training", 
+						customClass: "ganttOrange"
+					}]
+				},{
+					name: " ",
+					desc: "Deployment",
+					values: [{
+						from: 4,
+						to: 4.5,
+						label: "Deployment", 
+						customClass: "ganttOrange"
+					}]
+				},{
+					name: " ",
+					desc: "Warranty Period",
+					values: [{
+						from: 2,
+						to: 3.5,
+						label: "Warranty Period", 
+						customClass: "ganttOrange"
+					}, {from: 10,
+						to: 12,
+						label: "Warranty Period", 
+						customClass: "ganttOrange"}]
+				}],
+				navigate: "scroll",
+				scale: 10,
+				maxScale: 1000,
+				minScale: 1,
+				itemsPerPage: 10,
+				onItemClick: function(data) {
+					alert("Item clicked - show some details");
+				},
+				onAddClick: function(dt, rowId) {
+					alert("Empty space clicked - add an item!");
+				},
+				onRender: function() {
+					if (window.console && typeof console.log === "function") {
+						console.log("chart rendered");
+					}
+				}
+			});
+
+			$(".gantt").popover({
+				selector: ".bar",
+				title: "I'm a popover",
+				content: "And I'm the content of said popover.",
+				trigger: "hover"
+			});
+
+			prettyPrint();
+
+		});
+
+    </script>
+>>>>>>> master
 =======
 ﻿<!doctype html>
 <html lang="en-au">
