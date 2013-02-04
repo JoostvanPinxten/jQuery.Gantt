@@ -30,9 +30,10 @@
 
         var cookieKey = "jquery.fn.gantt";
         //var scales = ["hours", "days", "weeks", "months"];
-        var scales = [1,10,100,1000];
-		var minScale = scales[0];
-		var maxScale = scales[3];
+        
+		var minScale = 1;
+		var maxScale = 100000;
+		var timeLabel = "&micro;s";
         //Default settings
         var settings = {
             source: null,
@@ -45,11 +46,11 @@
             useCookie: false,
             maxScale: maxScale,
             minScale: minScale,
-			scales: scales,
             waitText: "Please wait...",
             onItemClick: function (data) { return; },
             onAddClick: function (data) { return; },
-            onRender: function() { return; }
+            onRender: function() { return; },
+			timeLabel: timeLabel
         };
 
         /*// custom selector `:findday` used to match on specified day in ms.
@@ -405,11 +406,11 @@
 				for(var i=0; i < Math.floor(range/10); i ++) {
 					//console.log(i);
 					subHeaderArr.push(
-						('<div class="row header year" style="width: '+tools.getCellSize()*10+'px;text-align:left;"><div class="fn-label">'+10*settings.scale * i+' ns</div></div>'));
+						('<div class="row header year" style="width: '+tools.getCellSize()*10+'px;text-align:left;"><div class="fn-label">'+10*settings.scale * i+' '+settings.timeLabel +'</div></div>'));
 				}
 				// and the last element:
 				subHeaderArr.push(
-					('<div class="row header year" style="width: '+ (range - Math.floor(range/10)*10)*tools.getCellSize() +'px;text-align:left;"><div class="fn-label">'+10*settings.scale * Math.floor(range/10)+' ns</div></div>'));
+					('<div class="row header year" style="width: '+ (range - Math.floor(range/10)*10)*tools.getCellSize() +'px;text-align:left;"><div class="fn-label">'+10*settings.scale * Math.floor(range/10)+' ' + settings.timeLabel + '</div></div>'));
 
 				var dataPanel = core.dataPanel(element, range * tools.getCellSize());
 
@@ -472,7 +473,7 @@
                                     .click(function () {
                                         core.zoomInOut(element, 1);
                                     })).
-								append($('<span id="nav-scale-level">Current scale (1 square) = '+ settings.scale +' ns</span>')
+								append($('<span id="nav-scale-level">Current scale (1 square) = '+ settings.scale +' &micro;s</span>')
 									)
                                 )
 							);
@@ -733,12 +734,12 @@
 					var scale = settings.scale;
 					if( val < 0) {
 						// zoom in
-						if(settings.scale/10 >= 1) {
+						if(settings.scale/10 >= settings.minScale) {
 							scale = settings.scale/10;
 						}
 					} else {
 						// zoom out
-						if(settings.scale*10 <= 10000){
+						if(settings.scale*10 <= settings.maxScale){
 							scale = settings.scale*10;
 						}
 					}
