@@ -402,7 +402,14 @@
 				range = tools.parseRange(element.timestampStart, element.timestampEnd, element.scaleStep);
 				headerArr.push(
 					('<div class="row header year" style="width: '+tools.getCellSize()*range+'px;"><div class="fn-label">Activity</div></div>'));
-
+				for(var i=0; i < Math.floor(range/10); i ++) {
+					//console.log(i);
+					subHeaderArr.push(
+						('<div class="row header year" style="width: '+tools.getCellSize()*10+'px;text-align:left;"><div class="fn-label">'+10*settings.scale * i+' ns</div></div>'));
+				}
+				// and the last element:
+				subHeaderArr.push(
+					('<div class="row header year" style="width: '+ (range - Math.floor(range/10)*10)*tools.getCellSize() +'px;text-align:left;"><div class="fn-label">'+10*settings.scale * Math.floor(range/10)+' ns</div></div>'));
 
 				var dataPanel = core.dataPanel(element, range * tools.getCellSize());
 
@@ -635,7 +642,7 @@
 							// find row
 							var topEl = $(element).find("#rowheader" + i);
 
-							var top = tools.getCellSize() + 2 + parseInt(topEl.attr("offset"), 10);
+							var top = tools.getCellSize() * 2 + 2 + parseInt(topEl.attr("offset"), 10);
 							_bar.css({ 'margin-top': top, 'margin-left': Math.floor(cFrom) });
 
 							datapanel.append(_bar);
@@ -724,7 +731,6 @@
             zoomInOut: function (element, val) {
                 core.waitToggle(element, true, function () {
 					var scale = settings.scale;
-					console.log(scale, val);
 					if( val < 0) {
 						// zoom in
 						if(settings.scale/10 >= 1) {
@@ -1095,7 +1101,7 @@
                 /*case "hours": this.headerRows = 5; this.scaleStep = 1; break;
                 case "weeks": this.headerRows = 3; this.scaleStep = 13; break;
                 case "months": this.headerRows = 2; this.scaleStep = 14; break;*/
-                default: this.headerRows = 1; this.scaleStep = 1; break;
+                default: this.headerRows = 2; this.scaleStep = 1; break;
             }
 
             this.scrollNavigation = {
